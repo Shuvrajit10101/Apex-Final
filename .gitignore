@@ -1,0 +1,9 @@
+# Local tooling / browser profile (not project files)
+.playwright-mcp/
+
+# OS / editor cruft
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+*~

@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apex Automations — AI & Automation Agency | Intelligent Systems on Autopilot</title>
+<meta name="description" content="Apex Automations designs and deploys AI chatbots, voice agents, intelligent workflows, CRM systems and custom software that run your business on autopilot. Measurable ROI within 90 days.">
+<meta name="theme-color" content="#050505">
+<meta property="og:title" content="Apex Automations — Intelligent Automation Solutions">
+<meta property="og:description" content="AI chatbots, voice agents, workflow automation & custom software. Your business, on autopilot.">
+<meta property="og:type" content="website">
+<!-- NOTE: replace these with your live domain at deploy time, e.g. https://apexautomations.in/assets/logo.png — social scrapers need absolute URLs -->
+<meta property="og:image" content="assets/logo.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Apex Automations — Intelligent Automation Solutions">
+<meta name="twitter:description" content="AI chatbots, voice agents, workflow automation & custom software. Your business, on autopilot.">
+<meta name="twitter:image" content="assets/logo.png">
+<link rel="icon" type="image/png" href="assets/logo-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=18">
+<noscript><style>#loader { display: none; }</style></noscript>
+</head>
+<body>
+
+<!-- ═══════════ LOADER ═══════════ -->
+<div id="loader">
+  <img class="loader-logo" src="assets/logo-512.png" alt="Apex Automations">
+  <div class="loader-name">Apex Automations</div>
+  <div class="loader-bar"><i></i></div>
+  <div class="loader-count">0%</div>
+</div>
+<script>
+/* Failsafe: never let a slow CDN hold the page hostage behind the loader */
+setTimeout(function () {
+  var l = document.getElementById('loader');
+  if (l && !l.classList.contains('done')) {
+    l.classList.add('done');
+    document.body.classList.add('ready');
+  }
+}, 4000);
+</script>
+
+<!-- Custom cursor -->
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<!-- Film grain -->
+<div class="noise"></div>
+
+<!-- Chapter ambience (shifts as the story progresses) -->
+<div class="ambience" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i><i class="a4"></i></div>
+
+<!-- WebGL particle eagle -->
+<canvas id="webgl"></canvas>
+
+<!-- ═══════════ NAVIGATION ═══════════ -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#home" aria-label="Apex Automations home">
+      <img src="assets/logo-512.png" alt="Apex Automations eagle logo">
+      <span>
+        <b>APEX</b>
+        <small>AUTOMATIONS</small>
+      </span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a class="nav-link" href="#services">Services</a></li>
+        <li><a class="nav-link" href="#process">Process</a></li>
+        <li><a class="nav-link" href="#packages">Packages</a></li>
+        <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
+        <li><a class="nav-link" href="#contact">Contact</a></li>
+        <li><a class="nav-link" href="catalogue.html">Catalogue&nbsp;↗</a></li>
+      </ul>
+    </nav>
+    <a class="nav-cta" href="https://wa.me/917087642005?text=Hi%20Apex%2C%20I%27d%20like%20to%20discuss%20a%20project" target="_blank" rel="noopener">Let's Talk</a>
+    <button class="burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-menu">
+  <a href="#services">Services</a>
+  <a href="#process">Process</a>
+  <a href="#packages">Packages</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#contact">Contact</a>
+  <a href="catalogue.html">Catalogue ↗</a>
+  <a class="mm-contact" href="https://wa.me/917087642005?text=Hi%20Apex%2C%20I%27d%20like%20to%20discuss%20a%20project" target="_blank" rel="noopener">WHATSAPP US</a>
+</div>
+
+<!-- Story progress (desktop) -->
+<nav class="story-nav" aria-label="Story chapters">
+  <a href="#home"><span>Prologue</span><i></i></a>
+  <a href="#why"><span>The Edge</span><i></i></a>
+  <a href="#services"><span>Wingspan</span><i></i></a>
+  <a href="#process"><span>Flight Path</span><i></i></a>
+  <a href="#calculator"><span>Stakes</span><i></i></a>
+  <a href="#packages"><span>Formation</span><i></i></a>
+  <a href="#portfolio"><span>Proof</span><i></i></a>
+  <a href="#faq"><span>Answers</span><i></i></a>
+  <a href="#contact"><span>Your Move</span><i></i></a>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero-stage" id="home">
+<div class="hero">
+  <canvas class="hero-film" id="eagle-canvas" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <!-- Beat 1 · the title card (lower-left, film style) -->
+    <div class="hero-beat hb-1" data-in="0" data-out="0.20">
+      <div class="hero-eyebrow"><span class="pulse-dot"></span> PROLOGUE · INTELLIGENT AUTOMATION AGENCY</div>
+      <h1 class="hero-title">
+        <span class="line"><span>Your Business,</span></span>
+        <span class="line"><span class="gold-grad">On Autopilot.</span></span>
+      </h1>
+    </div>
+    <!-- Beat 2 · the promise (upper-right, the eagle banks past it) -->
+    <div class="hero-beat hb-2" data-in="0.22" data-out="0.42">
+      <p class="hero-sub">Apex Automations engineers <b>AI chatbots, voice agents, intelligent workflows</b> and custom software that work around the clock — so you can focus on what actually grows revenue. Built for <b>measurable ROI within 90 days</b>.</p>
+    </div>
+    <!-- Beat 3 · the call (center, before the final climb) -->
+    <div class="hero-beat hb-3" data-in="0.44" data-out="0.66">
+      <div class="hero-ctas">
+        <a class="btn-gold" href="https://wa.me/917087642005?text=Hi%20Apex%2C%20I%27d%20like%20to%20discuss%20a%20project" target="_blank" rel="noopener">Start Your Project →</a>
+        <a class="btn-ghost" href="#services">Explore Services</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num" data-count="12" data-suffix="">0</div><div class="stat-label">Service Verticals</div></div>
+        <div class="stat"><div class="stat-num" data-count="100" data-suffix="+">0</div><div class="stat-label">Integrations Supported</div></div>
+        <div class="stat"><div class="stat-num" data-count="24" data-suffix="/7">0</div><div class="stat-label">Always-On Coverage</div></div>
+        <div class="stat"><div class="stat-num" data-count="90" data-suffix="-Day">0</div><div class="stat-label">ROI Target</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>SCROLL</span><div class="cue-line"></div></div>
+</div>
+</section>
+
+<!-- Golden story path (drawn by scroll) -->
+<div class="story-path" aria-hidden="true">
+  <svg preserveAspectRatio="none">
+    <defs>
+      <linearGradient id="spGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#e8c86a" stop-opacity="0.9"/>
+        <stop offset="0.5" stop-color="#d4a843" stop-opacity="0.65"/>
+        <stop offset="1" stop-color="#8b7335" stop-opacity="0.9"/>
+      </linearGradient>
+    </defs>
+    <path class="sp-line" d="" fill="none"/>
+  </svg>
+  <i class="sp-comet"></i>
+</div>
+
+<!-- ═══════════ TOOLS MARQUEE ═══════════ -->
+<div class="marquee-band" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item"><i></i>n8n</span>
+    <span class="marquee-item"><i></i>Make</span>
+    <span class="marquee-item"><i></i>Zapier</span>
+    <span class="marquee-item"><i></i>OpenAI</span>
+    <span class="marquee-item"><i></i>Claude</span>
+    <span class="marquee-item"><i></i>HubSpot</span>
+    <span class="marquee-item"><i></i>Zoho</span>
+    <span class="marquee-item"><i></i>Salesforce</span>
+    <span class="marquee-item"><i></i>WhatsApp Cloud API</span>
+    <span class="marquee-item"><i></i>Twilio</span>
+    <span class="marquee-item"><i></i>Shopify</span>
+    <span class="marquee-item"><i></i>Stripe</span>
+    <span class="marquee-item"><i></i>Google Cloud</span>
+    <span class="marquee-item"><i></i>Meta</span>
+    <span class="marquee-item"><i></i>ElevenLabs</span>
+    <span class="marquee-item"><i></i>Vapi</span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item"><i></i>n8n</span>
+    <span class="marquee-item"><i></i>Make</span>
+    <span class="marquee-item"><i></i>Zapier</span>
+    <span class="marquee-item"><i></i>OpenAI</span>
+    <span class="marquee-item"><i></i>Claude</span>
+    <span class="marquee-item"><i></i>HubSpot</span>
+    <span class="marquee-item"><i></i>Zoho</span>
+    <span class="marquee-item"><i></i>Salesforce</span>
+    <span class="marquee-item"><i></i>WhatsApp Cloud API</span>
+    <span class="marquee-item"><i></i>Twilio</span>
+    <span class="marquee-item"><i></i>Shopify</span>
+    <span class="marquee-item"><i></i>Stripe</span>
+    <span class="marquee-item"><i></i>Google Cloud</span>
+    <span class="marquee-item"><i></i>Meta</span>
+    <span class="marquee-item"><i></i>ElevenLabs</span>
+    <span class="marquee-item"><i></i>Vapi</span>
+  </div>
+</div>
+
+<!-- ═══ CHAPTER SCENE I ═══ -->
+<section class="chapter-scene">
+  <div class="cs-pin">
+    <div class="cs-num">01</div>
+    <div class="cs-body">
+      <div class="cs-kicker">Chapter One</div>
+      <h2 class="cs-title">The <em>Apex</em> Edge</h2>
+      <p class="cs-tag">Most agencies sell tools. We hunt outcomes.</p>
+      <div class="cs-rule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ THE APEX EDGE ═══════════ -->
+<section class="edge" id="why">
+  <img class="edge-watermark" src="assets/logo-512.png" alt="" aria-hidden="true">
+  <div class="wrap">
+    <div class="section-head head-left" data-reveal>
+      <div class="eyebrow">Why teams choose Apex</div>
+      <h2>Built with the precision <em>of a hunting eagle</em></h2>
+      <p class="lead">We engineer outcomes, not deliverables — systems designed around your business, deployed fast, and measured against one thing: return on investment.</p>
+    </div>
+    <div class="edge-grid" data-reveal-deal>
+      <div class="edge-card">
+        <div class="edge-num">01</div>
+        <h3>Engineered, Not Assembled</h3>
+        <p>No cookie-cutter templates. Every chatbot, workflow and dashboard is custom-built around how your business actually operates — then documented so you own it fully.</p>
+      </div>
+      <div class="edge-card">
+        <div class="edge-num">02</div>
+        <h3>Speed of a Strike</h3>
+        <p>Most systems go live in 1–4 weeks, not months. We scope tight, build in sprints, and ship working automation while competitors are still writing proposals.</p>
+      </div>
+      <div class="edge-card">
+        <div class="edge-num">03</div>
+        <h3>ROI-Obsessed</h3>
+        <p>Every build is tied to a number — hours saved, leads captured, response time cut. If it can't be measured, we won't pitch it. Target: visible ROI within 90 days.</p>
+      </div>
+      <div class="edge-card">
+        <div class="edge-num">04</div>
+        <h3>Beyond Launch</h3>
+        <p>Automation isn't fire-and-forget. We monitor, maintain and optimize your systems long after go-live, with care plans that keep everything flying at full altitude.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CHAPTER SCENE II ═══ -->
+<section class="chapter-scene">
+  <div class="cs-pin">
+    <div class="cs-num">02</div>
+    <div class="cs-body">
+      <div class="cs-kicker">Chapter Two</div>
+      <h2 class="cs-title">The <em>Wingspan</em></h2>
+      <p class="cs-tag">Twelve ways to win back wasted hours.</p>
+      <div class="cs-rule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">Twelve services · One partner</div>
+      <h2>Twelve ways we put your <em>business on autopilot</em></h2>
+      <p class="lead">From your first chatbot to a full-stack software platform — one partner for the entire automation journey.</p>
+    </div>
+    <div class="svc-grid" data-reveal-3d>
+
+      <article class="svc-card3d" data-tilt>
+        <div class="svc-glare"></div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><circle cx="5" cy="6" r="2.2"/><circle cx="19" cy="6" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M6.8 7.5 10.5 16M17.2 7.5 13.5 16M7.2 6h9.6"/></svg></div>
+        <div class="svc-cat">Automation</div>
+        <h3>Workflow Automation</h3>
+        <p>Intelligent pipelines that connect your CRM, email, spreadsheets and tools — no more copy-pasting, missed follow-ups or manual data entry.</p>
+        <div class="svc-meta"><span>⏱ 1–4 WEEKS</span><a class="svc-go" href="catalogue.html#svc-1">Details →</a></div>
+      </article>
+
+      <article class="svc-card3d" data-tilt>
+        <div class="svc-glare"></div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.8-.8L3 20l1-4.1a8.4 8.4 0 1 1 17-4.4Z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg></div>
+        <div class="svc-cat">Artificial Intelligence</div>
+        <h3>AI Chatbot &amp; Lead Generation</h3>
+        <p>Custom LLM-powered chatbots that engage visitors 24/7, qualify leads, book appointments and sync everything straight into your CRM.</p>
+        <div class="svc-meta"><span>⏱ 2–4 WEEKS</span><a class="svc-go" href="catalogue.html#svc-2">Details →</a></div>
+      </article>
+
+      <article class="svc-card3d" data-tilt>
+        <div class="svc-glare"></div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18M6.5 6.7h.01M9 6.7h.01"/></svg></div>
+        <div class="svc-cat">Web Development</div>
+        <h3>Website &amp; Landing Pages</h3>
+        <p>High-converting, mobile-first websites with SEO, analytics and automation wired in from day one — the digital foundation of your ecosystem.</p>
+        <div class="svc-meta"><span>⏱ 1–3 WEEKS</span><a class="svc-go" href="catalogue.html#svc-3">Details →</a></div>
+      </article>
+
+      <article class="svc-card3d" data-tilt>
+        <div class="svc-glare"></div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 3v18M8 7v10M4 10v4M16 7v10M20 10v4"/></svg></div>
+        <div class="svc-cat">Voice AI</div>
+        <h3>AI Voice Agents &amp; Call Automation</h3>
+        <p>AI phone agents that answer FAQs, qualify prospects, book appointments and route calls — in English and Hindi. Never miss a call again.</p>
+        <div class="svc-meta"><span>⏱ 3–6 WEEKS</span><a class="svc-go" href="catalogue.html#svc-4">Details →</a></div>
+      </article>
+
+      <article class="svc-card3d" data-tilt>
+        <div class="svc-glare"></div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16l-6 8v6l-4 2v-8L4 4Z"/></svg></div>
+        <div class="svc-cat">Sales Infrastructure</div>
+        <h3>CRM Setup, Migration &amp; Automation</h3>
+        <p>Complete CRM implementation or migration — pipelines, automated follow-ups, dashboards and team training. Your sales process, machined.</p>
+        <div class="svc-meta"><span>⏱ 2–5 WEEKS</span><a class="svc-go" href="catalogue.html#svc-5">Details →</a></div>
+      </article>
+
+      <article class="svc-card3d" data-tilt>
+        <div class="svc-glare"></div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M3 11v2l11 4V7L3 11ZM14 8.5c2 0 4 1.5 4 3.5s-2 3.5-4 3.5M18 9.5c1.5.6 2.5 1.6 2.5 2.5s-1 1.9-2.5 2.5M7 13.6V18a1.6 1.6 0 0 0 3.2 0v-3.2"/></svg></div>
+        <div class="svc-cat">Marketing</div>
+        <h3>Content &amp; Marketing Automation</h3>
+        <p>AI content pipelines that create, schedule and publish across social, email and blogs — your brand voice, distributed on autopilot.</p>
+        <div class="svc-meta"><span>⏱ 2–4 WEEKS</span><a class="svc-go" href="catalogue.html#svc-6">Details →</a></div>
+      </article>
+
+      <article class="svc-card3d" data-tilt>
+        <div class="svc-glare"></div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="m8 6-5 6 5 6M16 6l5 6-5 6M13.5 4l-3 16"/></svg></div>
+        <div class="svc-cat">Engineering</div>
+        <h3>Software Development</h3>
+        <p>Full-stack SaaS platforms, internal tools, APIs and dashboards — architected, built, tested and deployed to production grade.</p>
+        <div class="svc-meta"><span>⏱ 4–12 WEEKS</span><a class="svc-go" href="catalogue.html#svc-7">Details →</a></div>
+      </article>
+
+      <article class="svc-card3d" data-tilt>
+        <div class="svc-glare"></div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M8.5 18H5l-1.5 2.5V8A2.5 2.5 0 0 1 6 5.5h8A2.5 2.5 0 0 1 16.5 8v7.5A2.5 2.5 0 0 1 14 18H8.5Z"/><path d="M16.5 9H18a2.5 2.5 0 0 1 2.5 2.5V21L19 18.5h-6"/></svg></div>
+        <div class="svc-cat">Messaging</div>
+        <h3>WhatsApp Business API &amp; Omnichannel</h3>
+        <p>Official WhatsApp Business API, broadcast campaigns, and unified automation across WhatsApp, Instagram, Messenger and Telegram.</p>
+        <div class="svc-meta"><span>⏱ 1–3 WEEKS</span><a class="svc-go" href="catalogue.html#svc-8">Details →</a></div>
+      </article>
+
+      <article class="svc-card3d" data-tilt>
+        <div class="svc-glare"></div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 1.5v4M14 1.5v4M10 18.5v4M14 18.5v4M1.5 10h4M1.5 14h4M18.5 10h4M18.5 14h4"/></svg></div>
+        <div class="svc-cat">Applied AI</div>
+        <h3>Custom AI Agents &amp; Knowledge Assistants</h3>
+        <p>Private AI copilots trained on your documents and SOPs — answering staff questions, drafting replies and executing multi-step tasks.</p>
+        <div class="svc-meta"><span>⏱ 3–6 WEEKS</span><a class="svc-go" href="catalogue.html#svc-9">Details →</a></div>
+      </article>
+
+      <article class="svc-card3d" data-tilt>
+        <div class="svc-glare"></div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M6 21V11M11 21V5M16 21v-8M21 21V8" transform="translate(0 -0.5)"/></svg></div>
+        <div class="svc-cat">Intelligence</div>
+        <h3>Data Analytics &amp; BI Dashboards</h3>
+        <p>Live KPI dashboards and automated reports delivered to your inbox or WhatsApp — every number that matters, in one place, always current.</p>
+        <div class="svc-meta"><span>⏱ 2–4 WEEKS</span><a class="svc-go" href="catalogue.html#svc-10">Details →</a></div>
+      </article>
+
+      <article class="svc-card3d" data-tilt>
+        <div class="svc-glare"></div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M6 7h12l1.5 13h-15L6 7Z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg></div>
+        <div class="svc-cat">Commerce</div>
+        <h3>E-commerce Automation</h3>
+        <p>Abandoned-cart recovery, COD confirmation bots, order &amp; inventory sync, shipping notifications and review collection — on autopilot.</p>
+        <div class="svc-meta"><span>⏱ 2–5 WEEKS</span><a class="svc-go" href="catalogue.html#svc-11">Details →</a></div>
+      </article>
+
+      <article class="svc-card3d" data-tilt>
+        <div class="svc-glare"></div>
+        <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 3 4.5 6v5c0 4.8 3.2 8.4 7.5 10 4.3-1.6 7.5-5.2 7.5-10V6L12 3Z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></svg></div>
+        <div class="svc-cat">Ongoing Care</div>
+        <h3>Managed Automation Care Plans</h3>
+        <p>Monthly monitoring, error recovery, optimization sprints and priority support — so your systems keep improving long after launch.</p>
+        <div class="svc-meta"><span>⏱ MONTHLY</span><a class="svc-go" href="catalogue.html#svc-12">Details →</a></div>
+      </article>
+
+    </div>
+    <div class="services-cta" data-reveal>
+      <a class="btn-ghost" href="catalogue.html">View the Full Service Catalogue →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CHAPTER SCENE III ═══ -->
+<section class="chapter-scene">
+  <div class="cs-pin">
+    <div class="cs-num">03</div>
+    <div class="cs-body">
+      <div class="cs-kicker">Chapter Three</div>
+      <h2 class="cs-title">The <em>Flight</em> Path</h2>
+      <p class="cs-tag">No mystery. No months of waiting. Just momentum.</p>
+      <div class="cs-rule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PROCESS ═══════════ -->
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="section-head head-right" data-reveal>
+      <div class="eyebrow">How we work</div>
+      <h2>From first call to <em>full flight</em> in five steps</h2>
+    </div>
+    <div class="process-track">
+      <div class="process-rail"><div class="process-line"></div></div>
+
+      <div class="step" data-step>
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <div class="step-tag">Free · 30 Minutes</div>
+          <h3>Discover</h3>
+          <p>A free automation audit call. We map where your team loses hours, where leads slip away, and which fixes pay for themselves fastest.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step>
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <div class="step-tag">Within 48 Hours</div>
+          <h3>Blueprint</h3>
+          <p>You receive a custom automation blueprint — exact scope, timeline, tools and projected ROI. No jargon, no padding, no surprises.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step>
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <div class="step-tag">Sprint-Based</div>
+          <h3>Build</h3>
+          <p>We build in short sprints with progress updates you can actually see. You review working systems, not slide decks.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step>
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <div class="step-tag">Go-Live</div>
+          <h3>Launch</h3>
+          <p>Deployment, integration testing, team training and full documentation. Your system goes live — and your team knows how to fly it.</p>
+        </div>
+      </div>
+
+      <div class="step" data-step>
+        <div class="step-num">05</div>
+        <div class="step-body">
+          <div class="step-tag">Ongoing</div>
+          <h3>Scale &amp; Support</h3>
+          <p>Monitoring, optimization and new automation as you grow. We watch the numbers and keep raising your altitude.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ROI CALCULATOR ═══════════ -->
+<section class="calc" id="calculator">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">The Stakes</div>
+      <h2>What is manual work <em>costing you?</em></h2>
+      <p class="lead">Drag the sliders. Industry data shows roughly 70% of repetitive work can be automated.</p>
+    </div>
+    <div class="calc-box" data-reveal>
+      <div class="calc-fields">
+        <div class="calc-cur">
+          <button type="button" class="on" data-cur="inr">₹ INR</button>
+          <button type="button" data-cur="usd">$ USD</button>
+        </div>
+        <div class="calc-field">
+          <label for="calc-team">Team members doing repetitive work <output id="calc-team-out">5</output></label>
+          <input type="range" id="calc-team" min="1" max="100" value="5">
+        </div>
+        <div class="calc-field">
+          <label for="calc-hours">Hours per person, per week, on manual tasks <output id="calc-hours-out">10 hrs</output></label>
+          <input type="range" id="calc-hours" min="1" max="40" value="10">
+        </div>
+        <div class="calc-field">
+          <label for="calc-rate">Average hourly cost of that time <output id="calc-rate-out">₹400/hr</output></label>
+          <input type="range" id="calc-rate" min="10" max="100" value="40">
+        </div>
+      </div>
+      <div class="calc-result">
+        <div class="cr-label">Estimated Yearly Savings</div>
+        <div class="calc-num" id="calc-output">₹0</div>
+        <p class="cr-sub">That's about <b id="calc-hours-saved" style="color:var(--gold-l)">0 hours</b> of human time per year your business could win back with automation.</p>
+        <a class="btn-gold" href="https://wa.me/917087642005?text=Hi%20Apex%2C%20I%27d%20like%20a%20free%20automation%20audit" target="_blank" rel="noopener">Claim Your Free Audit →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CHAPTER SCENE IV ═══ -->
+<section class="chapter-scene">
+  <div class="cs-pin">
+    <div class="cs-num">04</div>
+    <div class="cs-body">
+      <div class="cs-kicker">Chapter Four</div>
+      <h2 class="cs-title">The <em>Formation</em></h2>
+      <p class="cs-tag">Choose your altitude. We handle the flying.</p>
+      <div class="cs-rule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PACKAGES ═══════════ -->
+<section class="packages" id="packages">
+  <div class="wrap">
+    <div class="section-head head-left" data-reveal>
+      <div class="eyebrow">Engagements</div>
+      <h2>Choose your <em>starting point</em></h2>
+      <p class="lead">Every package is custom-scoped to your business. Reach out for a detailed proposal.</p>
+    </div>
+    <div class="pkg-grid" data-reveal-packages>
+      <div class="pkg">
+        <h3>Starter</h3>
+        <p class="pkg-desc">For businesses exploring automation</p>
+        <ul>
+          <li>Single service engagement</li>
+          <li>Up to 3 integrations</li>
+          <li>1 revision round</li>
+          <li>14-day post-launch support</li>
+          <li>Full documentation</li>
+        </ul>
+        <a class="pkg-btn pkg-btn-outline" href="https://wa.me/917087642005?text=Hi%20Apex%2C%20interested%20in%20the%20Starter%20package" target="_blank" rel="noopener">Let's Talk →</a>
+      </div>
+      <div class="pkg featured">
+        <div class="pkg-badge">MOST POPULAR</div>
+        <h3>Growth</h3>
+        <p class="pkg-desc">Complete automation bundle</p>
+        <ul>
+          <li>Up to 3 services combined</li>
+          <li>AI chatbot + CRM + workflows</li>
+          <li>Up to 8 integrations</li>
+          <li>3 revision rounds</li>
+          <li>30-day support + training</li>
+        </ul>
+        <a class="pkg-btn pkg-btn-gold" href="https://wa.me/917087642005?text=Hi%20Apex%2C%20interested%20in%20the%20Growth%20package" target="_blank" rel="noopener">Let's Talk →</a>
+      </div>
+      <div class="pkg">
+        <h3>Enterprise</h3>
+        <p class="pkg-desc">Full-stack transformation</p>
+        <ul>
+          <li>Unlimited services</li>
+          <li>Custom software + automation</li>
+          <li>Unlimited integrations &amp; revisions</li>
+          <li>90-day support + monitoring</li>
+          <li>Priority response SLA</li>
+        </ul>
+        <a class="pkg-btn pkg-btn-outline" href="https://wa.me/917087642005?text=Hi%20Apex%2C%20interested%20in%20the%20Enterprise%20package" target="_blank" rel="noopener">Let's Talk →</a>
+      </div>
+    </div>
+    <p class="pkg-note">All packages are custom-scoped based on your business needs. Contact us for pricing.</p>
+  </div>
+</section>
+
+<!-- ═══════════ PORTFOLIO (coming soon) ═══════════ -->
+<section class="portfolio" id="portfolio">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div class="eyebrow">The Proof</div>
+      <h2>The proof is <em>in flight</em></h2>
+    </div>
+    <div class="folio-empty" data-reveal>
+      <img src="assets/logo-512.png" alt="Apex Automations eagle">
+      <h3>Case studies landing soon</h3>
+      <p>We're heads-down building and documenting our first wave of client transformations. Want your business to be one of them?</p>
+      <a class="btn-gold" href="https://wa.me/917087642005?text=Hi%20Apex%2C%20I%20want%20to%20be%20one%20of%20your%20first%20case%20studies" target="_blank" rel="noopener">Become a Case Study →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FAQ ═══════════ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head head-right" data-reveal>
+      <div class="eyebrow">The Answers</div>
+      <h2>Answers, <em>before you ask</em></h2>
+    </div>
+    <div class="faq-list" data-reveal>
+      <div class="faq-item">
+        <button class="faq-q">How quickly can my automation go live?<span class="faq-x"></span></button>
+        <div class="faq-a"><p>Most single-service builds go live in 1–4 weeks. Larger combinations (chatbot + CRM + workflows) typically take 4–6 weeks, and full custom software 4–12 weeks. You'll get an exact timeline in your blueprint within 48 hours of our first call.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How much does it cost?<span class="faq-x"></span></button>
+        <div class="faq-a"><p>Every package is custom-scoped to your business, because a 3-person clinic and a 50-person agency need very different systems. After a free 30-minute audit call you'll receive a fixed-price proposal — no hourly billing surprises, no hidden fees.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">We're not technical at all. Is that a problem?<span class="faq-x"></span></button>
+        <div class="faq-a"><p>That's exactly who we build for. Every system ships with plain-language documentation, recorded training for your team, and post-launch support. If you can use WhatsApp, you can run the systems we build.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do you work with businesses outside India?<span class="faq-x"></span></button>
+        <div class="faq-a"><p>Yes. We're based in Chandigarh, India and work with clients globally. All collaboration happens over WhatsApp, email and video calls, and our systems are built on cloud platforms that work anywhere in the world.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What tools and platforms do you build on?<span class="faq-x"></span></button>
+        <div class="faq-a"><p>We're tool-agnostic and pick what fits your budget and scale: n8n, Make and Zapier for workflows; OpenAI and Claude for AI; HubSpot, Zoho and Salesforce for CRM; WhatsApp Cloud API and Twilio for messaging; React and Node.js for custom software. You always own your accounts and your data.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What happens after launch?<span class="faq-x"></span></button>
+        <div class="faq-a"><p>Every package includes post-launch support (14–90 days depending on tier). After that, our Managed Care Plans cover monitoring, error recovery, optimization and new automation each month — or we hand everything over with documentation if you prefer to self-manage.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EPILOGUE SCENE ═══ -->
+<section class="chapter-scene">
+  <div class="cs-pin">
+    <div class="cs-num">∞</div>
+    <div class="cs-body">
+      <div class="cs-kicker">Epilogue</div>
+      <h2 class="cs-title">Your <em>Move</em></h2>
+      <p class="cs-tag">The sky is patient. Your competitors aren't.</p>
+      <div class="cs-rule"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-info" data-reveal>
+        <div class="eyebrow" style="margin-bottom:18px;">Ready when you are</div>
+        <h2>Ready to put your business <em style="font-style:italic;color:var(--gold)">on autopilot?</em></h2>
+        <p>Tell us about your project. We respond within 24 hours with honest advice and a clear next step — no pressure, no spam.</p>
+        <a class="c-card" href="https://wa.me/917087642005" target="_blank" rel="noopener">
+          <span class="ci"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.8-.8L3 20l1-4.1a8.4 8.4 0 1 1 17-4.4Z"/></svg></span>
+          <span><b>WhatsApp</b><span>+91 70876 42005 · fastest response</span></span>
+        </a>
+        <a class="c-card" href="mailto:homechoudhuryapex@gmail.com">
+          <span class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></svg></span>
+          <span><b>Email</b><span>homechoudhuryapex@gmail.com</span></span>
+        </a>
+        <div class="c-card">
+          <span class="ci"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.8 7-11a7 7 0 1 0-14 0c0 5.2 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+          <span><b>Chandigarh, India</b><span>Serving clients worldwide</span></span>
+        </div>
+        <div class="c-card">
+          <span class="ci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span>
+          <span><b>Response Time</b><span>Under 24 hours, every time</span></span>
+        </div>
+      </div>
+      <div class="form-shell" data-reveal>
+        <h3>Start the conversation</h3>
+        <p class="fs-sub">Fill this in and it opens a pre-written WhatsApp message to us — one tap and it's sent.</p>
+        <form id="contact-form">
+          <div class="f-row">
+            <div class="f-field">
+              <label for="f-name">Your Name *</label>
+              <input id="f-name" type="text" required placeholder="Aryan Sharma">
+            </div>
+            <div class="f-field">
+              <label for="f-biz">Business Name</label>
+              <input id="f-biz" type="text" placeholder="Sharma Realty">
+            </div>
+          </div>
+          <div class="f-field">
+            <label for="f-service">What do you need?</label>
+            <select id="f-service">
+              <option value="">— General enquiry —</option>
+              <option>Workflow Automation</option>
+              <option>AI Chatbot &amp; Lead Generation</option>
+              <option>Website &amp; Landing Pages</option>
+              <option>AI Voice Agents &amp; Call Automation</option>
+              <option>CRM Setup, Migration &amp; Automation</option>
+              <option>Content &amp; Marketing Automation</option>
+              <option>Software Development</option>
+              <option>WhatsApp Business API &amp; Omnichannel</option>
+              <option>Custom AI Agents &amp; Knowledge Assistants</option>
+              <option>Data Analytics &amp; BI Dashboards</option>
+              <option>E-commerce Automation</option>
+              <option>Managed Automation Care Plans</option>
+              <option>Not sure yet — need guidance</option>
+            </select>
+          </div>
+          <div class="f-field">
+            <label for="f-msg">Tell us about your project</label>
+            <textarea id="f-msg" placeholder="e.g. We run a real-estate agency and lose leads because nobody replies after 7pm..."></textarea>
+          </div>
+          <button class="btn-gold form-send" type="submit">Send via WhatsApp →</button>
+          <p class="form-note">Opening WhatsApp… if nothing happens, message us directly at +91 70876 42005.</p>
+          <p class="form-alt">Prefer email? <a href="mailto:homechoudhuryapex@gmail.com">homechoudhuryapex@gmail.com</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo-512.png" alt="Apex Automations">
+        <b>APEX AUTOMATIONS</b>
+        <p>Intelligent automation solutions engineered with the precision of an eagle. Your business, on autopilot.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#packages">Packages</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="catalogue.html">Service Catalogue</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="catalogue.html#svc-1">Workflow Automation</a></li>
+          <li><a href="catalogue.html#svc-2">AI Chatbots</a></li>
+          <li><a href="catalogue.html#svc-4">Voice Agents</a></li>
+          <li><a href="catalogue.html#svc-8">WhatsApp API</a></li>
+          <li><a href="catalogue.html#svc-7">Software Development</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://wa.me/917087642005" target="_blank" rel="noopener">+91 70876 42005</a></li>
+          <li><a href="mailto:homechoudhuryapex@gmail.com">homechoudhuryapex@gmail.com</a></li>
+          <li><a href="https://wa.me/917087642005?text=Hi%20Apex%2C%20I%27d%20like%20a%20free%20automation%20audit" target="_blank" rel="noopener">Book a Free Audit</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy Policy</a>
+      <span class="fl-dot">·</span>
+      <a href="terms.html">Terms of Service</a>
+      <span class="fl-dot">·</span>
+      <span>Apex Automations, Chandigarh, India</span>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year">2026</span> <b>Apex Automations</b>. All rights reserved.</span>
+      <span>Engineered with precision in Chandigarh, India 🦅</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating actions -->
+<a class="wa-float" href="https://wa.me/917087642005?text=Hi%20Apex%2C%20I%27d%20like%20to%20discuss%20a%20project" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16 3C9.4 3 4 8.3 4 14.9c0 2.6.8 5 2.3 7L4.6 28l6.3-1.6c1.6.9 3.3 1.3 5.1 1.3 6.6 0 12-5.3 12-11.9S22.6 3 16 3zm0 21.8c-1.6 0-3.2-.4-4.5-1.2l-.3-.2-3.7 1 1-3.6-.2-.3c-1.3-1.6-2-3.5-2-5.6 0-5.2 4.4-9.4 9.7-9.4s9.7 4.2 9.7 9.4-4.4 9.9-9.7 9.9zm5.3-7.1c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.4z"/></svg>
+</a>
+<button class="to-top" aria-label="Back to top">↑</button>
+
+<!-- Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
+<script src="js/particles.js?v=7" defer></script>
+<script src="js/eagle-scroll.js?v=5" defer></script>
+<script src="js/main.js?v=14" defer></script>
+</body>
+</html>

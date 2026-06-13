@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apex Automations — Service Catalogue 2026</title>
+<meta name="description" content="The complete Apex Automations service catalogue — 12 automation, AI and software services with deliverables, timelines and packages.">
+<meta name="theme-color" content="#050505">
+<!-- NOTE: replace og:image with your live domain's absolute URL at deploy time -->
+<meta property="og:title" content="Apex Automations — Service Catalogue 2026">
+<meta property="og:description" content="12 automation, AI and software services with deliverables, timelines and packages.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/logo.png">
+<link rel="icon" type="image/png" href="assets/logo-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#050505;--bg2:#0a0a0a;--card:#101010;--card2:#151515;
+--gold:#d4a843;--gold-l:#e8c86a;--gold-d:#8b7335;--gold-label:#9d8240;--gold-bg:rgba(212,168,67,0.05);
+--white:#f5f5f3;--gray:#a3a09a;--dark:#8a867c;--border:rgba(212,168,67,0.12);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:rgba(212,168,67,0.25);color:#fff}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:#0a0a0a}
+::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+a{color:inherit;text-decoration:none}
+
+/* ── Top bar ── */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 26px;
+  background:rgba(10,10,10,0.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.topbar .tb-brand{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;color:var(--gold);letter-spacing:2px;font-weight:700;font-size:15px}
+.topbar .tb-brand img{width:34px;height:34px}
+.topbar .tb-back{
+  font-size:12px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;
+  border:1px solid rgba(212,168,67,0.35);border-radius:30px;padding:9px 20px;
+  transition:background .3s,color .3s;white-space:nowrap;
+}
+.topbar .tb-back:hover{background:var(--gold);color:#0a0a0a}
+
+/* ── Header ── */
+.cat-header{
+  min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:100px 24px 60px;position:relative;
+  background:radial-gradient(ellipse at 50% 30%,rgba(212,168,67,0.05) 0%,transparent 70%);
+}
+.cat-header::after{
+  content:'';position:absolute;bottom:0;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold-d),transparent);
+}
+.logo{width:140px;height:140px;margin-bottom:32px;filter:drop-shadow(0 0 40px rgba(212,168,67,0.2));animation:logoFloat 5s ease-in-out infinite}
+@keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.company-name{
+  font-family:'Playfair Display',serif;font-size:clamp(32px,6vw,48px);font-weight:700;
+  color:var(--gold);letter-spacing:6px;margin-bottom:12px;
+}
+.tagline{font-size:13px;letter-spacing:4px;color:var(--dark);text-transform:uppercase;margin-bottom:48px}
+.cat-title{
+  font-family:'Playfair Display',serif;font-size:clamp(44px,9vw,72px);font-weight:600;
+  color:var(--white);line-height:1.1;margin-bottom:16px;
+}
+.cat-title span{color:var(--gold);display:block;font-size:clamp(22px,4vw,36px);margin-top:8px;letter-spacing:2px;font-style:italic}
+.cat-year{font-size:13px;color:var(--dark);letter-spacing:3px;margin-top:24px}
+.scroll-hint{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px}
+.scroll-hint span{font-size:10px;letter-spacing:3px;color:var(--dark)}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold-d),transparent);animation:scrollPulse 2s ease infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3;height:40px}50%{opacity:.8;height:50px}}
+
+/* ── Intro ── */
+.intro{padding:110px 24px 50px;max-width:800px;margin:0 auto;text-align:center}
+.intro h2{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,36px);color:var(--white);margin-bottom:24px;line-height:1.3}
+.intro p{font-size:16px;color:var(--gray);line-height:1.8}
+.intro .highlight{color:var(--gold);font-weight:500}
+
+/* ── Index chips ── */
+.toc{max-width:900px;margin:40px auto 0;padding:0 24px 30px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.toc a{
+  font-size:12px;letter-spacing:1px;color:var(--gray);
+  border:1px solid rgba(255,255,255,0.08);border-radius:30px;padding:13px 18px;
+  transition:color .3s,border-color .3s,background .3s;
+}
+.toc a:hover,.toc a:active,.toc a:focus-visible{color:var(--gold);border-color:rgba(212,168,67,0.4);background:var(--gold-bg)}
+.toc a b{color:var(--gold-label);font-weight:700;margin-right:6px}
+
+/* ── Services ── */
+.services-section{padding:60px 24px 120px;max-width:1100px;margin:0 auto;position:relative}
+.services-section::before{
+  content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom,transparent,var(--gold-d) 10%,var(--gold-d) 90%,transparent);
+  transform:translateX(-50%);
+}
+.svc{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:80px;position:relative;scroll-margin-top:90px}
+.svc:nth-child(even){direction:rtl}
+.svc:nth-child(even) > *{direction:ltr}
+.svc-num-col{display:flex;align-items:flex-start;justify-content:center;padding-top:40px;position:relative;z-index:2}
+.svc-num{
+  width:64px;height:64px;border-radius:50%;
+  border:2px solid var(--gold);background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--gold);
+  box-shadow:0 0 30px rgba(212,168,67,0.08);
+}
+.svc-card{
+  background:var(--card);border:1px solid var(--border);border-radius:20px;
+  padding:48px 40px;position:relative;overflow:hidden;
+  transition:border-color .4s,transform .3s,box-shadow .4s;
+}
+.svc-card:hover{border-color:rgba(212,168,67,0.3);transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,0.45)}
+.svc-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .4s;
+}
+.svc-card:hover::before{opacity:1}
+.svc-label{font-size:11px;letter-spacing:3px;color:var(--gold-label);text-transform:uppercase;margin-bottom:12px}
+.svc-card h3{font-family:'Playfair Display',serif;font-size:28px;font-weight:600;color:var(--white);margin-bottom:16px;line-height:1.3}
+.svc-card .desc{font-size:15px;color:var(--gray);line-height:1.7;margin-bottom:28px}
+.deliverables{list-style:none;padding:0}
+.deliverables li{
+  font-size:14px;color:var(--gray);padding:10px 0;
+  border-bottom:1px solid rgba(255,255,255,0.03);
+  display:flex;align-items:flex-start;gap:12px;
+}
+.deliverables li:last-child{border-bottom:none}
+.deliverables li::before{
+  content:'';flex-shrink:0;width:6px;height:6px;border-radius:50%;
+  background:var(--gold);margin-top:7px;
+}
+.svc-tag{
+  display:inline-block;margin-top:24px;font-size:11px;letter-spacing:1px;
+  color:var(--gold);border:1px solid var(--border);padding:6px 16px;border-radius:20px;
+}
+
+/* ── Reveal on scroll ── */
+.fade{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.fade.in{opacity:1;transform:translateY(0)}
+
+/* ── Packages ── */
+.packages{padding:80px 24px 120px;max-width:1100px;margin:0 auto}
+.packages-header{text-align:center;margin-bottom:64px}
+.packages-header h2{font-family:'Playfair Display',serif;font-size:clamp(30px,5vw,40px);color:var(--white);margin-bottom:12px}
+.packages-header p{font-size:15px;color:var(--gray)}
+.packages-header .gold{color:var(--gold)}
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.pkg{
+  background:var(--card);border:1px solid var(--border);border-radius:20px;
+  padding:40px 32px;text-align:center;position:relative;
+  transition:border-color .4s,transform .3s;display:flex;flex-direction:column;
+}
+.pkg:hover{border-color:rgba(212,168,67,0.25);transform:translateY(-4px)}
+.pkg.featured{border-color:rgba(212,168,67,0.4);background:rgba(212,168,67,0.02)}
+.pkg-badge{
+  position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+  background:var(--gold);color:var(--bg);font-size:10px;font-weight:700;
+  letter-spacing:2px;padding:6px 20px;border-radius:20px;white-space:nowrap;
+}
+.pkg h3{font-family:'Playfair Display',serif;font-size:26px;color:var(--white);margin:20px 0 8px}
+.pkg .pkg-desc{font-size:13px;color:var(--dark);margin-bottom:28px}
+.pkg ul{list-style:none;padding:0;text-align:left;margin-bottom:32px;flex:1}
+.pkg li{
+  font-size:13px;color:var(--gray);padding:9px 0;
+  border-bottom:1px solid rgba(255,255,255,0.03);
+  display:flex;align-items:flex-start;gap:10px;
+}
+.pkg li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0}
+.pkg li:last-child{border-bottom:none}
+.pkg-btn{
+  display:block;padding:14px;border-radius:30px;
+  font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  transition:transform .3s,box-shadow .3s,background .3s;
+}
+.pkg-btn-outline{border:1px solid rgba(212,168,67,0.4);color:var(--gold)}
+.pkg-btn-outline:hover{background:rgba(212,168,67,0.1);transform:translateY(-2px)}
+.pkg-btn-gold{background:linear-gradient(120deg,var(--gold-l),var(--gold) 60%,var(--gold-d));color:#0a0a0a;box-shadow:0 8px 26px rgba(212,168,67,0.3)}
+.pkg-btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(212,168,67,0.45)}
+.pkg-note{text-align:center;font-size:12px;color:var(--dark);margin-top:36px}
+
+/* ── CTA ── */
+.cta{
+  padding:120px 24px;text-align:center;
+  background:radial-gradient(ellipse at 50% 100%,rgba(212,168,67,0.07) 0%,transparent 60%);
+  border-top:1px solid rgba(255,255,255,0.04);
+}
+.cta h2{font-family:'Playfair Display',serif;font-size:clamp(34px,6vw,52px);margin-bottom:18px}
+.cta h2 span{color:var(--gold);font-style:italic}
+.cta p{color:var(--gray);font-size:15px;max-width:520px;margin:0 auto 40px;line-height:1.8}
+.cta-btn{
+  display:inline-block;
+  background:linear-gradient(120deg,var(--gold-l),var(--gold) 60%,var(--gold-d));
+  color:#0a0a0a;font-weight:700;font-size:13px;letter-spacing:2px;text-transform:uppercase;
+  padding:18px 44px;border-radius:40px;
+  box-shadow:0 10px 34px rgba(212,168,67,0.3);
+  transition:transform .3s,box-shadow .3s;
+}
+.cta-btn:hover{transform:translateY(-3px);box-shadow:0 16px 44px rgba(212,168,67,0.45)}
+.cta-info{margin-top:40px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap;font-size:13.5px;color:var(--gray)}
+.cta-info a:hover{color:var(--gold)}
+.cta-info span{color:var(--dark)}
+
+/* ── Footer ── */
+.cat-footer{padding:36px 24px;text-align:center;border-top:1px solid rgba(255,255,255,0.04);font-size:12.5px;color:var(--dark)}
+.cat-footer .brand{color:var(--gold)}
+.cat-legal{margin-bottom:12px}
+.cat-legal a{color:var(--gray);transition:color .3s}
+.cat-legal a:hover{color:var(--gold)}
+
+@media(max-width:380px){
+  .topbar{padding:10px 14px}
+  .topbar .tb-back{padding:8px 12px;font-size:10px;letter-spacing:1px}
+}
+@media(max-width:860px){
+  .services-section::before{display:none}
+  .svc{grid-template-columns:1fr;gap:18px}
+  .svc:nth-child(even){direction:ltr}
+  .svc-num-col{justify-content:flex-start;padding-top:0}
+  .svc-num{width:52px;height:52px;font-size:19px}
+  .svc-card{padding:36px 26px}
+  .pkg-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto}
+  .pkg.featured{order:-1}
+}
+/* on-brand keyboard focus ring (matches the main site) */
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
+  outline:2px solid var(--gold-l);outline-offset:3px;border-radius:4px;
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .fade{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="tb-brand" href="index.html"><img src="assets/logo-512.png" alt="Apex Automations">APEX</a>
+  <a class="tb-back" href="index.html">← Back to Website</a>
+</div>
+
+<!-- HEADER -->
+<header class="cat-header">
+  <img class="logo" src="assets/logo-512.png" alt="Apex Automations eagle logo">
+  <h1 class="company-name">APEX AUTOMATIONS</h1>
+  <p class="tagline">Intelligent Automation Solutions</p>
+  <div class="cat-title">Service<br>Catalogue<span>2026 Edition</span></div>
+  <p class="cat-year">12 SERVICES • ONE PARTNER</p>
+  <div class="scroll-hint">
+    <span>EXPLORE</span>
+    <div class="scroll-line"></div>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="intro fade">
+  <h2>We build systems that run your business <span class="highlight">on autopilot</span></h2>
+  <p>Apex Automations is a specialized automation agency that designs, builds, and deploys intelligent systems — from AI chatbots and workflow engines to full-stack software solutions. Every system we build is engineered for one outcome: <span class="highlight">measurable ROI within 90 days</span>.</p>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<nav class="toc fade">
+  <a href="#svc-1"><b>01</b>Workflow Automation</a>
+  <a href="#svc-2"><b>02</b>AI Chatbot &amp; Leads</a>
+  <a href="#svc-3"><b>03</b>Websites</a>
+  <a href="#svc-4"><b>04</b>Voice AI</a>
+  <a href="#svc-5"><b>05</b>CRM</a>
+  <a href="#svc-6"><b>06</b>Marketing</a>
+  <a href="#svc-7"><b>07</b>Software</a>
+  <a href="#svc-8"><b>08</b>WhatsApp API</a>
+  <a href="#svc-9"><b>09</b>AI Agents</a>
+  <a href="#svc-10"><b>10</b>Data &amp; BI</a>
+  <a href="#svc-11"><b>11</b>E-commerce</a>
+  <a href="#svc-12"><b>12</b>Care Plans</a>
+</nav>
+
+<!-- SERVICES -->
+<section class="services-section">
+
+  <!-- Service 01 -->
+  <div class="svc fade" id="svc-1">
+    <div class="svc-num-col"><div class="svc-num">01</div></div>
+    <div class="svc-card">
+      <div class="svc-label">Automation</div>
+      <h3>Workflow Automation</h3>
+      <p class="desc">We design and deploy intelligent workflows that connect your CRM, email, spreadsheets, and business tools into seamless automated pipelines. No more copy-pasting between apps, no more missed follow-ups, no more manual data entry.</p>
+      <ul class="deliverables">
+        <li>Multi-step workflow design &amp; deployment (n8n, Make, Zapier)</li>
+        <li>CRM integration — HubSpot, Zoho, Salesforce, Freshsales</li>
+        <li>Email &amp; WhatsApp automation sequences</li>
+        <li>Cross-platform data sync &amp; error handling</li>
+        <li>Documentation, training &amp; post-launch support</li>
+      </ul>
+      <span class="svc-tag">Delivery: 1 – 4 weeks</span>
+    </div>
+  </div>
+
+  <!-- Service 02 -->
+  <div class="svc fade" id="svc-2">
+    <div class="svc-num-col"><div class="svc-num">02</div></div>
+    <div class="svc-card">
+      <div class="svc-label">Artificial Intelligence</div>
+      <h3>AI Chatbot &amp; Lead Generation</h3>
+      <p class="desc">Custom AI-powered chatbots that engage your website visitors around the clock, qualify leads based on your criteria, book appointments, and feed data directly into your CRM. Built with advanced LLMs for natural, human-like conversations in any language.</p>
+      <ul class="deliverables">
+        <li>Custom LLM-powered chatbot trained on your business</li>
+        <li>Website + WhatsApp deployment</li>
+        <li>Lead qualification scoring &amp; appointment booking</li>
+        <li>CRM auto-sync — leads, contacts, deal creation</li>
+        <li>Multilingual support — English, Hindi, and more</li>
+        <li>Analytics dashboard &amp; performance tracking</li>
+      </ul>
+      <span class="svc-tag">Delivery: 2 – 4 weeks</span>
+    </div>
+  </div>
+
+  <!-- Service 03 -->
+  <div class="svc fade" id="svc-3">
+    <div class="svc-num-col"><div class="svc-num">03</div></div>
+    <div class="svc-card">
+      <div class="svc-label">Web Development</div>
+      <h3>Website &amp; Landing Pages</h3>
+      <p class="desc">High-converting, mobile-responsive websites and landing pages optimized for speed, SEO, and conversions. Every site is built to serve as the digital foundation of your automation ecosystem — with forms, chatbots, and tracking wired in from day one.</p>
+      <ul class="deliverables">
+        <li>Custom responsive website — up to 10 pages</li>
+        <li>Landing page design with conversion optimization</li>
+        <li>SEO setup, meta tags &amp; Google Business Profile</li>
+        <li>Contact forms connected to automation workflows</li>
+        <li>Google Analytics 4, pixel tracking &amp; reporting</li>
+        <li>Hosting, deployment &amp; SSL configuration</li>
+      </ul>
+      <span class="svc-tag">Delivery: 1 – 3 weeks</span>
+    </div>
+  </div>
+
+  <!-- Service 04 -->
+  <div class="svc fade" id="svc-4">
+    <div class="svc-num-col"><div class="svc-num">04</div></div>
+    <div class="svc-card">
+      <div class="svc-label">Voice AI</div>
+      <h3>AI Voice Agents &amp; Call Automation</h3>
+      <p class="desc">AI-powered phone agents that handle inbound and outbound calls — answering FAQs, qualifying prospects, scheduling appointments, and routing to your team when needed. Never miss a call, never lose a lead.</p>
+      <ul class="deliverables">
+        <li>Custom AI voice agent setup &amp; personality configuration</li>
+        <li>Inbound call handling with intelligent routing</li>
+        <li>Appointment scheduling via voice commands</li>
+        <li>CRM integration for automatic call logging</li>
+        <li>Call analytics, recording &amp; reporting dashboard</li>
+        <li>Hindi + English voice support</li>
+      </ul>
+      <span class="svc-tag">Delivery: 3 – 6 weeks</span>
+    </div>
+  </div>
+
+  <!-- Service 05 -->
+  <div class="svc fade" id="svc-5">
+    <div class="svc-num-col"><div class="svc-num">05</div></div>
+    <div class="svc-card">
+      <div class="svc-label">Sales Infrastructure</div>
+      <h3>CRM Setup, Migration &amp; Automation</h3>
+      <p class="desc">Complete CRM implementation from scratch or migration from legacy systems. We set up your sales pipeline, layer intelligent automations on top, and train your team — so your entire sales process runs like a machine.</p>
+      <ul class="deliverables">
+        <li>CRM setup &amp; configuration — HubSpot, Zoho, Salesforce, Freshsales</li>
+        <li>Data migration from spreadsheets &amp; legacy systems</li>
+        <li>Pipeline automation — deal stages, follow-up triggers</li>
+        <li>Automated email sequences &amp; notifications</li>
+        <li>Custom dashboards, reports &amp; forecasting</li>
+        <li>Team training, documentation &amp; onboarding</li>
+      </ul>
+      <span class="svc-tag">Delivery: 2 – 5 weeks</span>
+    </div>
+  </div>
+
+  <!-- Service 06 -->
+  <div class="svc fade" id="svc-6">
+    <div class="svc-num-col"><div class="svc-num">06</div></div>
+    <div class="svc-card">
+      <div class="svc-label">Marketing</div>
+      <h3>Content &amp; Marketing Automation</h3>
+      <p class="desc">AI-powered content pipelines that create, schedule, and distribute across all your marketing channels. SEO blog posts, social media content, email campaigns, and newsletters — produced and published on autopilot.</p>
+      <ul class="deliverables">
+        <li>AI content generation pipeline with brand voice training</li>
+        <li>Social media scheduling — LinkedIn, Instagram, X, Facebook</li>
+        <li>Email marketing automation — sequences, newsletters</li>
+        <li>SEO content optimization &amp; keyword strategy</li>
+        <li>Content calendar management &amp; approval workflow</li>
+        <li>Analytics, performance tracking &amp; A/B testing</li>
+      </ul>
+      <span class="svc-tag">Delivery: 2 – 4 weeks</span>
+    </div>
+  </div>
+
+  <!-- Service 07 -->
+  <div class="svc fade" id="svc-7">
+    <div class="svc-num-col"><div class="svc-num">07</div></div>
+    <div class="svc-card">
+      <div class="svc-label">Engineering</div>
+      <h3>Software Development</h3>
+      <p class="desc">Full-stack custom software solutions built for your specific business needs. From SaaS platforms and internal tools to APIs and data dashboards — we architect, build, test, and deploy production-grade software that scales with your business.</p>
+      <ul class="deliverables">
+        <li>Custom web applications — React, Next.js, Node.js</li>
+        <li>SaaS product development — MVP to production</li>
+        <li>Internal business tools &amp; admin panels</li>
+        <li>REST API design, development &amp; documentation</li>
+        <li>Database architecture — PostgreSQL, MongoDB</li>
+        <li>Third-party API integrations &amp; data pipelines</li>
+        <li>Testing, deployment &amp; CI/CD setup</li>
+        <li>Post-launch maintenance &amp; feature iterations</li>
+      </ul>
+      <span class="svc-tag">Delivery: 4 – 12 weeks</span>
+    </div>
+  </div>
+
+  <!-- Service 08 -->
+  <div class="svc fade" id="svc-8">
+    <div class="svc-num-col"><div class="svc-num">08</div></div>
+    <div class="svc-card">
+      <div class="svc-label">Messaging</div>
+      <h3>WhatsApp Business API &amp; Omnichannel</h3>
+      <p class="desc">Turn WhatsApp into your most powerful sales and support channel. Official WhatsApp Business API setup, automated conversations, broadcast campaigns, and unified inboxes across every messaging platform your customers use.</p>
+      <ul class="deliverables">
+        <li>Official WhatsApp Cloud API setup &amp; verification support</li>
+        <li>Automated replies, drip campaigns &amp; broadcast messaging</li>
+        <li>Template message design &amp; approval handling</li>
+        <li>Unified automation across Instagram, Messenger &amp; Telegram</li>
+        <li>Product catalogue, payments &amp; order updates inside WhatsApp</li>
+        <li>Conversation analytics &amp; agent handover rules</li>
+      </ul>
+      <span class="svc-tag">Delivery: 1 – 3 weeks</span>
+    </div>
+  </div>
+
+  <!-- Service 09 -->
+  <div class="svc fade" id="svc-9">
+    <div class="svc-num-col"><div class="svc-num">09</div></div>
+    <div class="svc-card">
+      <div class="svc-label">Applied AI</div>
+      <h3>Custom AI Agents &amp; Knowledge Assistants</h3>
+      <p class="desc">Private AI copilots trained on your documents, SOPs, and product knowledge. They answer staff questions instantly, draft replies, summarize reports, and execute multi-step tasks across your tools — like hiring a tireless analyst who already knows your business.</p>
+      <ul class="deliverables">
+        <li>Knowledge assistant trained on your docs (RAG architecture)</li>
+        <li>Internal copilots for sales, support &amp; operations teams</li>
+        <li>Multi-step agentic workflows — research, draft, execute</li>
+        <li>Slack, Microsoft Teams &amp; WhatsApp integration</li>
+        <li>Role-based access, guardrails &amp; usage analytics</li>
+        <li>Continuous knowledge base updates &amp; tuning</li>
+      </ul>
+      <span class="svc-tag">Delivery: 3 – 6 weeks</span>
+    </div>
+  </div>
+
+  <!-- Service 10 -->
+  <div class="svc fade" id="svc-10">
+    <div class="svc-num-col"><div class="svc-num">10</div></div>
+    <div class="svc-card">
+      <div class="svc-label">Intelligence</div>
+      <h3>Data Analytics &amp; BI Dashboards</h3>
+      <p class="desc">Stop running your business on gut feeling. We pipe data from your CRM, ads, store, and finance tools into live dashboards — every KPI that matters, always current, with automated reports delivered straight to your inbox or WhatsApp.</p>
+      <ul class="deliverables">
+        <li>KPI dashboards — Looker Studio, Power BI, custom builds</li>
+        <li>Automated data pipelines from all your business tools</li>
+        <li>Scheduled reports to email &amp; WhatsApp — daily, weekly, monthly</li>
+        <li>Sales, marketing &amp; finance performance tracking</li>
+        <li>Anomaly alerts — know the moment numbers go off-track</li>
+        <li>Forecasting &amp; trend analysis</li>
+      </ul>
+      <span class="svc-tag">Delivery: 2 – 4 weeks</span>
+    </div>
+  </div>
+
+  <!-- Service 11 -->
+  <div class="svc fade" id="svc-11">
+    <div class="svc-num-col"><div class="svc-num">11</div></div>
+    <div class="svc-card">
+      <div class="svc-label">Commerce</div>
+      <h3>E-commerce Automation</h3>
+      <p class="desc">Your store, running itself. From abandoned-cart recovery and COD confirmation bots to inventory sync and shipping notifications — we automate the entire order journey so you sell more while doing less.</p>
+      <ul class="deliverables">
+        <li>Shopify, WooCommerce &amp; custom store automation</li>
+        <li>Abandoned cart recovery — WhatsApp, email &amp; SMS</li>
+        <li>COD confirmation &amp; order verification bots</li>
+        <li>Real-time order, inventory &amp; logistics sync</li>
+        <li>Shipping notifications &amp; delivery tracking updates</li>
+        <li>Automated review collection &amp; loyalty flows</li>
+      </ul>
+      <span class="svc-tag">Delivery: 2 – 5 weeks</span>
+    </div>
+  </div>
+
+  <!-- Service 12 -->
+  <div class="svc fade" id="svc-12">
+    <div class="svc-num-col"><div class="svc-num">12</div></div>
+    <div class="svc-card">
+      <div class="svc-label">Ongoing Care</div>
+      <h3>Managed Automation Care Plans</h3>
+      <p class="desc">Automation isn't fire-and-forget. Our monthly care plans keep every system you run — built by us or anyone else — monitored, maintained, and improving. Like having an automation engineer on staff, without the salary.</p>
+      <ul class="deliverables">
+        <li>24/7 workflow monitoring &amp; proactive error recovery</li>
+        <li>Monthly optimization sprints &amp; performance reviews</li>
+        <li>New automation credits included every month</li>
+        <li>Priority support with guaranteed response SLA</li>
+        <li>Quarterly strategy reviews &amp; automation roadmap</li>
+        <li>Platform updates, API changes &amp; security patches handled</li>
+      </ul>
+      <span class="svc-tag">Ongoing: Monthly Retainer</span>
+    </div>
+  </div>
+
+</section>
+
+<!-- PACKAGES -->
+<section class="packages">
+  <div class="packages-header fade">
+    <h2>Choose your <span class="gold">starting point</span></h2>
+    <p>Every package is custom-scoped to your business. Reach out for a detailed proposal.</p>
+  </div>
+  <div class="pkg-grid">
+    <div class="pkg fade">
+      <h3>Starter</h3>
+      <p class="pkg-desc">For businesses exploring automation</p>
+      <ul>
+        <li>Single service engagement</li>
+        <li>Up to 3 integrations</li>
+        <li>1 revision round</li>
+        <li>14-day post-launch support</li>
+        <li>Full documentation</li>
+      </ul>
+      <a href="https://wa.me/917087642005?text=Hi%20Apex%2C%20interested%20in%20the%20Starter%20package" class="pkg-btn pkg-btn-outline" target="_blank" rel="noopener">Let's Talk →</a>
+    </div>
+    <div class="pkg featured fade">
+      <div class="pkg-badge">MOST POPULAR</div>
+      <h3>Growth</h3>
+      <p class="pkg-desc">Complete automation bundle</p>
+      <ul>
+        <li>Up to 3 services combined</li>
+        <li>AI chatbot + CRM + workflows</li>
+        <li>Up to 8 integrations</li>
+        <li>3 revision rounds</li>
+        <li>30-day support + training</li>
+      </ul>
+      <a href="https://wa.me/917087642005?text=Hi%20Apex%2C%20interested%20in%20the%20Growth%20package" class="pkg-btn pkg-btn-gold" target="_blank" rel="noopener">Let's Talk →</a>
+    </div>
+    <div class="pkg fade">
+      <h3>Enterprise</h3>
+      <p class="pkg-desc">Full-stack transformation</p>
+      <ul>
+        <li>Unlimited services</li>
+        <li>Custom software + automation</li>
+        <li>Unlimited integrations &amp; revisions</li>
+        <li>90-day support + monitoring</li>
+        <li>Priority response SLA</li>
+      </ul>
+      <a href="https://wa.me/917087642005?text=Hi%20Apex%2C%20interested%20in%20the%20Enterprise%20package" class="pkg-btn pkg-btn-outline" target="_blank" rel="noopener">Let's Talk →</a>
+    </div>
+  </div>
+  <p class="pkg-note">All packages are custom-scoped based on your business needs. Contact us for pricing.</p>
+</section>
+
+<!-- CTA -->
+<section class="cta fade">
+  <h2>Ready to <span>automate</span>?</h2>
+  <p>Tell us about your project. We respond within 24 hours — and after a free 30-minute audit call, you'll have a fixed-price proposal within 48 hours.</p>
+  <a href="https://wa.me/917087642005?text=Hi%20Apex%2C%20I%27d%20like%20to%20discuss%20a%20project" class="cta-btn" target="_blank" rel="noopener">Start a Conversation →</a>
+  <div class="cta-info">
+    <a href="mailto:homechoudhuryapex@gmail.com">homechoudhuryapex@gmail.com</a>
+    <span>•</span>
+    <a href="https://wa.me/917087642005" target="_blank" rel="noopener">+91 70876 42005</a>
+    <span>•</span>
+    <span>Chandigarh, India</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="cat-footer">
+  <p class="cat-legal">
+    <a href="privacy.html">Privacy Policy</a> ·
+    <a href="terms.html">Terms of Service</a> ·
+    Apex Automations, Chandigarh, India
+  </p>
+  <p>© <span id="cat-year">2026</span> <span class="brand">Apex Automations</span>. All Rights Reserved.</p>
+</footer>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.fade');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function(e){ e.classList.add('in'); });
+    return;
+  }
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting) { en.target.classList.add('in'); obs.unobserve(en.target); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(function(e){ obs.observe(e); });
+  var y = document.getElementById('cat-year');
+  if (y) y.textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
