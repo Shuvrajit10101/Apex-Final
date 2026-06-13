@@ -80,7 +80,12 @@
     var scale = fit * (1 + ease * 0.22);
     var dw = iw * scale, dh = ih * scale;
     var dx = (cw - dw) / 2;
-    var dy = (ch - dh) / 2 - ease * ch * 0.28;
+    // Mobile: anchor the contained eagle in the upper third (just under the
+    // nav) instead of dead-centre, so the hero reads as a deliberate
+    // top-anchored composition with the title beneath it — not a small bird
+    // floating in empty space. Desktop stays centred.
+    var baseDy = isMobile ? ch * 0.12 : (ch - dh) / 2;
+    var dy = baseDy - ease * ch * 0.28;
     ctx.drawImage(im, dx, dy, dw, dh);
   }
 

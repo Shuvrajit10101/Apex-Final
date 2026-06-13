@@ -345,7 +345,7 @@ section { position: relative; }
 .hero-stage { position: relative; }
 html.js .hero-stage { height: 300vh; }
 @media (max-width: 768px) {
-  html.js .hero-stage { height: 170vh; } /* shorter flight on phones — less scroll-jacking */
+  html.js .hero-stage { height: 140vh; } /* shorter flight on phones — less scroll-jacking */
 }
 html.js .hero-stage .hero {
   position: sticky; top: 0;
@@ -1425,10 +1425,12 @@ html.js .svc-card3d:not(.pop) .svc-icon svg { opacity: 0; transform: scale(0.2) 
   :root { --nav-h: 66px; }
   .hero { padding-bottom: 70px; }
   .hero-ctas { margin-bottom: 56px; }
-  /* phone framing for the hero title-card beats */
-  .hb-1 { left: 22px; right: 22px; bottom: 24%; }
-  .hb-2 { left: 22px; right: 22px; top: 20%; max-width: none; text-align: left; }
-  .hb-3 { bottom: 10%; }
+  /* phone framing: the contained eagle sits top-anchored (~12–38% tall),
+     so the title-card beats cluster directly beneath it instead of leaving
+     a gap, and the CTA beat fills the lower third */
+  .hb-1 { left: 22px; right: 22px; top: 44%; bottom: auto; }
+  .hb-2 { left: 22px; right: 22px; top: 44%; bottom: auto; max-width: none; text-align: left; }
+  .hb-3 { bottom: 13%; }
   .hb-3 .hero-ctas { margin-bottom: 34px; }
   .hero-ctas .btn-gold, .hero-ctas .btn-ghost { padding: 15px 28px; font-size: 12px; }
   .contact-grid { grid-template-columns: 1fr; }
