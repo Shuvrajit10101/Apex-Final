@@ -71,9 +71,13 @@
     var ease = exit * exit * (3 - 2 * exit); // smoothstep
     canvas.style.opacity = (0.9 * (1 - ease)).toFixed(3);
 
-    // cover-fit, then scale up + drift up during the exit
+    // Fit the 16:9 footage to the frame, then scale up + drift up on exit.
+    // Desktop = cover (fills the wide hero). Mobile (portrait) = contain, so
+    // the WHOLE eagle stays visible instead of cropping to the centre 26%;
+    // the black void around it screen-blends into the page invisibly.
     var iw = im.naturalWidth, ih = im.naturalHeight;
-    var scale = Math.max(cw / iw, ch / ih) * (1 + ease * 0.22);
+    var fit = isMobile ? Math.min(cw / iw, ch / ih) : Math.max(cw / iw, ch / ih);
+    var scale = fit * (1 + ease * 0.22);
     var dw = iw * scale, dh = ih * scale;
     var dx = (cw - dw) / 2;
     var dy = (ch - dh) / 2 - ease * ch * 0.28;
