@@ -69,8 +69,10 @@
   setTimeout(finishLoader, 3500); // hard cap — never trap the page
 
   /* ---------- Smooth scroll (Lenis) ---------- */
+  // Mobile uses native momentum scrolling — it's smoother than a JS rAF loop
+  // on touch, and frees the main thread during the heavy hero scrub.
   var lenis = null;
-  if (typeof window.Lenis !== 'undefined' && !prefersReduced) {
+  if (typeof window.Lenis !== 'undefined' && !prefersReduced && !isMobile) {
     lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
     function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);

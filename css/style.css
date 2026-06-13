@@ -345,7 +345,7 @@ section { position: relative; }
 .hero-stage { position: relative; }
 html.js .hero-stage { height: 300vh; }
 @media (max-width: 768px) {
-  html.js .hero-stage { height: 240vh; } /* shorter flight on phones */
+  html.js .hero-stage { height: 170vh; } /* shorter flight on phones — less scroll-jacking */
 }
 html.js .hero-stage .hero {
   position: sticky; top: 0;
@@ -1153,7 +1153,7 @@ input[type="range"]:focus-visible {
   transform-origin: center;
 }
 @media (max-width: 768px) {
-  .chapter-scene { height: 140vh; }
+  .chapter-scene { height: 115vh; }
   .cs-num { font-size: 62vw; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1454,6 +1454,32 @@ html.js .svc-card3d:not(.pop) .svc-icon svg { opacity: 0; transform: scale(0.2) 
   .wrap { padding: 0 20px; }
   .hero-stats { gap: 24px; }
   .svc-grid { grid-template-columns: 1fr; }
+}
+
+/* ============ MOBILE PERFORMANCE ============ */
+/* This page is GPU/compositor-bound on phones. Drop the heaviest paint
+   layers — the animated full-screen fractal-noise grain and the
+   backdrop-filter blurs that recompute on every scroll frame — and swap
+   them for solid fills so scrolling stays smooth. */
+@media (max-width: 768px) {
+  .noise { display: none; }
+  .nav.scrolled {
+    background: rgba(5, 5, 5, 0.92);
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+  }
+  .marquee-band {
+    background: rgba(8, 8, 8, 0.92);
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+  }
+  .hero-eyebrow { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .mobile-menu {
+    background: rgba(4, 4, 4, 0.985);
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+  }
+  .to-top {
+    background: rgba(12, 12, 12, 0.92);
+    backdrop-filter: none; -webkit-backdrop-filter: none;
+  }
 }
 
 /* ============ KEYBOARD FOCUS ============ */

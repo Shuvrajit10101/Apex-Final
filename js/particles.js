@@ -12,6 +12,10 @@
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isMobile = window.matchMedia('(max-width: 768px)').matches || 'ontouchstart' in window;
 
+  // Mobile: skip WebGL entirely. A per-frame Three.js render is pure GPU
+  // fill-rate cost on phones; the eagle film + CSS ambience carry the mood.
+  if (isMobile) { canvas.style.display = 'none'; return; }
+
   var renderer;
   try {
     renderer = new THREE.WebGLRenderer({
