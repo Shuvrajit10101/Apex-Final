@@ -32,7 +32,7 @@
   --nav-h: 76px;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; } /* never let an off-screen reveal/transform widen the page (mobile zoom-out bug); clip is position:sticky-safe */
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 

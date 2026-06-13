@@ -267,7 +267,7 @@
     // story: process steps swoop in from alternating sides
     gsap.utils.toArray('[data-step]').forEach(function (step, i) {
       gsap.from(step, {
-        x: i % 2 ? 90 : -90, opacity: 0,
+        x: (i % 2 ? 1 : -1) * (isMobile ? 28 : 90), opacity: 0,
         duration: 1.0, ease: 'power3.out',
         scrollTrigger: { trigger: step, start: 'top 86%', once: true }
       });
