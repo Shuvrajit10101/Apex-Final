@@ -73,9 +73,15 @@
   // on touch, and frees the main thread during the heavy hero scrub.
   var lenis = null;
   if (typeof window.Lenis !== 'undefined' && !prefersReduced && !isMobile) {
-    lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
-    function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-    requestAnimationFrame(raf);
+    lenis = new Lenis({ lerp: 0.11, smoothWheel: true }); // 0.11 settles a touch faster → fewer trailing scrub frames
+    // Drive Lenis off GSAP's single ticker instead of a 2nd standalone rAF
+    // loop — one scheduler for scroll + animation, and it pauses with the tab.
+    if (hasGSAP) {
+      gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+    } else {
+      var raf = function (time) { if (!document.hidden) lenis.raf(time); requestAnimationFrame(raf); };
+      requestAnimationFrame(raf);
+    }
     if (hasST) lenis.on('scroll', ScrollTrigger.update);
     window.apexLenis = lenis; // exposed for programmatic scrolling/debugging
   }
@@ -100,10 +106,15 @@
   /* ---------- Navigation ---------- */
   var nav = document.querySelector('.nav');
   var toTop = document.querySelector('.to-top');
+  var navScrolled = null, toTopShown = null;
   function onScrollNav() {
     var y = window.scrollY;
-    if (nav) nav.classList.toggle('scrolled', y > 40);
-    if (toTop) toTop.classList.toggle('show', y > 700);
+    var s = y > 40, t = y > 700;
+    // only touch classList when state actually flips — toggling a
+    // backdrop-filtered element's class every scroll event re-triggers
+    // its blur layer
+    if (nav && s !== navScrolled) { nav.classList.toggle('scrolled', s); navScrolled = s; }
+    if (toTop && t !== toTopShown) { toTop.classList.toggle('show', t); toTopShown = t; }
   }
   window.addEventListener('scroll', onScrollNav, { passive: true });
   onScrollNav();
@@ -150,7 +161,8 @@
             l.classList.toggle('active', l.getAttribute('href') === '#' + en.target.id);
           });
           if (ambience && ambMap[en.target.id]) {
-            ambience.className = 'ambience amb-' + ambMap[en.target.id];
+            var cls = 'ambience amb-' + ambMap[en.target.id];
+            if (ambience.className !== cls) ambience.className = cls; // skip redundant style recalc
           }
         }
       });
@@ -299,7 +311,7 @@
     if (wm) {
       gsap.to(wm, {
         y: -120, rotation: 6, ease: 'none',
-        scrollTrigger: { trigger: '.edge', start: 'top bottom', end: 'bottom top', scrub: true }
+        scrollTrigger: { trigger: '.edge', start: 'top bottom', end: 'bottom top', scrub: 0.6 } // smoothed: fewer transform commits than scrub:true
       });
     }
   } else {
@@ -333,13 +345,16 @@
   /* ---------- Magnetic buttons ---------- */
   if (finePointer && !prefersReduced) {
     document.querySelectorAll('.btn-gold, .btn-ghost, .nav-cta').forEach(function (btn) {
+      var bb = null; // cache the rect on enter instead of reading layout every move
+      btn.addEventListener('pointerenter', function () { bb = btn.getBoundingClientRect(); });
       btn.addEventListener('pointermove', function (e) {
-        var b = btn.getBoundingClientRect();
-        var dx = e.clientX - (b.left + b.width / 2);
-        var dy = e.clientY - (b.top + b.height / 2);
+        if (!bb) bb = btn.getBoundingClientRect();
+        var dx = e.clientX - (bb.left + bb.width / 2);
+        var dy = e.clientY - (bb.top + bb.height / 2);
         btn.style.transform = 'translate(' + dx * 0.18 + 'px,' + (dy * 0.22 - 3) + 'px)';
       });
       btn.addEventListener('pointerleave', function () {
+        bb = null;
         btn.style.transform = '';
       });
     });
@@ -545,11 +560,15 @@
         dot.style.transform = 'translate(' + cx + 'px,' + cy + 'px) translate(-50%,-50%)';
       }, { passive: true });
       (function ringLoop() {
+        requestAnimationFrame(ringLoop);
+        if (document.hidden) return;
+        // settle-gate: when the ring has caught up to a stationary pointer,
+        // stop writing a transform every frame (this loop ran forever otherwise)
+        if (Math.abs(cx - rx) < 0.1 && Math.abs(cy - ry) < 0.1) return;
         rx += (cx - rx) * 0.16;
         ry += (cy - ry) * 0.16;
         // the trailing -50% keeps the ring centered even when .is-hover resizes it
         ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px) translate(-50%,-50%)';
-        requestAnimationFrame(ringLoop);
       })();
       document.querySelectorAll('a, button, [data-tilt], input, select, textarea, .faq-q').forEach(function (el) {
         el.addEventListener('pointerenter', function () { ring.classList.add('is-hover'); });
@@ -604,32 +623,47 @@
       spLine.style.strokeDasharray = L + ' ' + L;
       spLine.style.strokeDashoffset = L;
 
+      // Pre-sample the comet positions ONCE (getPointAtLength is a synchronous
+      // geometry walk — calling it every scroll frame on this full-page path
+      // was a top jank source). onUpdate now just indexes this array.
+      var SAMPLES = 240, cometPts = new Array(SAMPLES + 1);
+      for (var s = 0; s <= SAMPLES; s++) {
+        var pt = spLine.getPointAtLength((s / SAMPLES) * L);
+        cometPts[s] = [pt.x, pt.y];
+      }
+      var cometShown = null;
+
       if (spTrigger) spTrigger.kill();
       spTrigger = ScrollTrigger.create({
         trigger: spContainer, start: 'top 72%', end: 'bottom 80%', scrub: 0.6,
         onUpdate: function (self) {
-          var drawn = L * self.progress;
-          spLine.style.strokeDashoffset = L - drawn;
+          var prog = self.progress;
+          spLine.style.strokeDashoffset = L * (1 - prog);
           if (spComet) {
-            if (self.progress > 0.002 && self.progress < 0.995) {
-              var pt = spLine.getPointAtLength(drawn);
-              spComet.style.opacity = '1';
-              spComet.style.transform = 'translate(' + pt.x.toFixed(1) + 'px,' + pt.y.toFixed(1) + 'px)';
-            } else {
-              spComet.style.opacity = '0';
+            var on = prog > 0.002 && prog < 0.995;
+            if (on) {
+              var p = cometPts[(prog * SAMPLES) | 0] || cometPts[SAMPLES];
+              spComet.style.transform = 'translate(' + p[0].toFixed(1) + 'px,' + p[1].toFixed(1) + 'px)';
             }
+            if (on !== cometShown) { spComet.style.opacity = on ? '1' : '0'; cometShown = on; }
           }
         }
       });
+      spBuilt = true;
     };
 
-    var spRebuild;
+    var spBuilt = false, spLastW = 0, spRebuild;
     window.addEventListener('resize', function () {
+      // mobile URL-bar show/hide fires resize on height only — ignore those;
+      // only rebuild when the WIDTH actually changes
+      if (document.documentElement.clientWidth === spLastW) return;
+      spLastW = document.documentElement.clientWidth;
       clearTimeout(spRebuild);
       spRebuild = setTimeout(buildPath, 250);
     });
+    spLastW = document.documentElement.clientWidth;
     window.addEventListener('load', function () { setTimeout(buildPath, 400); });
-    setTimeout(buildPath, 1400); // covers the case where load fired before we attached
+    setTimeout(function () { if (!spBuilt) buildPath(); }, 1400); // fallback only if load already fired
     window.__buildStoryPath = buildPath; // debug/test hook
   }
 

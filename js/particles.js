@@ -28,7 +28,7 @@
     canvas.style.display = 'none';
     return;
   }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5)); /* capped: extra pixels cost fill-rate, buy nothing for soft dust */
   renderer.setClearColor(0x000000, 0);
 
   var scene = new THREE.Scene();
@@ -53,7 +53,7 @@
   var sprite = makeSprite();
 
   /* ---------- Ambient gold dust (always on) ---------- */
-  var dustCount = isMobile ? 320 : 850;
+  var dustCount = 500; /* lighter than the old 850 — fewer points to transform/raster each frame */
   var dustGeo = new THREE.BufferGeometry();
   var dPos = new Float32Array(dustCount * 3);
   var dCol = new Float32Array(dustCount * 3);
@@ -238,8 +238,11 @@
       var elapsed = t - formStart;
       var allDone = true;
 
-      // desktop keeps its living shimmer (formed stays false there);
-      // mobile + reduced-motion freeze the buffer once assembly is done
+      // Run the per-vertex assembly ONLY while forming. Once assembled we
+      // freeze the buffer on every device — the old desktop "living shimmer"
+      // re-uploaded the entire position buffer to the GPU every frame forever
+      // (a major always-on cost) for a ±1px wobble. The subtle whole-group
+      // breathing/rotation below gives life with zero per-vertex cost.
       if (!formed) {
         for (var i = 0; i < d.count; i++) {
           var p = (elapsed - d.delay[i] * FORM_DURATION * 0.6) / (FORM_DURATION * 0.55);
@@ -247,19 +250,12 @@
           if (p < 1) allDone = false;
           var e = easeOutCubic(p);
           var ix = i * 3;
-          var x = d.start[ix] + (d.target[ix] - d.start[ix]) * e;
-          var y = d.start[ix + 1] + (d.target[ix + 1] - d.start[ix + 1]) * e;
-          var z = d.start[ix + 2] + (d.target[ix + 2] - d.start[ix + 2]) * e;
-          if (p >= 1 && !isMobile && !prefersReduced) {
-            // gentle living shimmer after formation
-            var w = d.wobble[i];
-            x += Math.sin(t * 0.9 + w) * 1.1;
-            y += Math.cos(t * 0.8 + w * 1.3) * 1.1;
-          }
-          pos[ix] = x; pos[ix + 1] = y; pos[ix + 2] = z;
+          pos[ix] = d.start[ix] + (d.target[ix] - d.start[ix]) * e;
+          pos[ix + 1] = d.start[ix + 1] + (d.target[ix + 1] - d.start[ix + 1]) * e;
+          pos[ix + 2] = d.start[ix + 2] + (d.target[ix + 2] - d.start[ix + 2]) * e;
         }
         eagle.geometry.attributes.position.needsUpdate = true;
-        if (allDone && (isMobile || prefersReduced)) formed = true; // freeze updates on mobile once formed
+        if (allDone) formed = true; // freeze the buffer once assembled (all devices)
       }
 
       // mouse parallax + slow breathing (off under reduced motion)
