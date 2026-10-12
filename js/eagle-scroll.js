@@ -1,9 +1,12 @@
 /* ============================================================
    APEX AUTOMATIONS — Scroll-Scrubbed Eagle Flight
-   The hero is pinned while the user's scroll drives a 121-frame
-   eagle sequence on a canvas. Footage is black-backed and
-   screen-blended, so the eagle flies inside the page. At the end
-   of its run it rises and dissolves; the site continues below.
+   The hero is pinned while the user's scroll drives a 102-frame
+   eagle sequence on a canvas: a head-on eagle beating its wings
+   (one 34-frame wingbeat tiled three times, so the loop is
+   seamless and the scrub opens on the fully spread pose). Footage
+   is black-backed and screen-blended, so the eagle flies inside
+   the page. At the end of its run it rises and dissolves; the site
+   continues below.
 
    Perf: progress is derived from cached scroll metrics (no
    per-frame getBoundingClientRect reflow); draw() skips redundant
@@ -22,7 +25,7 @@
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isMobile = window.matchMedia('(max-width: 768px)').matches;
 
-  var FRAMES = 121;
+  var FRAMES = 102;
   var SCRUB_END = 0.74;   // share of the pin spent flying; the rest is the exit
 
   var display = 0, target = 0, dirty = true;
@@ -30,7 +33,7 @@
 
   /* ---------- frame loading ---------- */
   var imgs = new Array(FRAMES);
-  function src(i) { return 'assets/eagle-seq2/frame-' + ('00' + (i + 1)).slice(-3) + '.webp'; }
+  function src(i) { return 'assets/eagle-seq3/frame-' + ('00' + (i + 1)).slice(-3) + '.webp'; }
   function load(i, cb) {
     if (imgs[i]) {
       if (cb && imgs[i].ready) cb();
