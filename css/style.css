@@ -1421,9 +1421,10 @@ html.js .svc-card3d:not(.pop) .svc-icon svg { opacity: 0; transform: scale(0.2) 
   :root { --nav-h: 66px; }
   .hero { padding-bottom: 70px; }
   .hero-ctas { margin-bottom: 56px; }
-  /* phone framing: the contained eagle sits top-anchored (~12–38% tall),
-     so the title-card beats cluster directly beneath it instead of leaving
-     a gap, and the CTA beat fills the lower third */
+  /* phone framing: phones play a full-screen portrait eagle sequence and
+     eagle-scroll.js centres the eagle between the nav and .hb-1, so the
+     title-card beats cluster directly beneath it, and the CTA beat fills
+     the lower third */
   .hb-1 { left: 22px; right: 22px; top: 44%; bottom: auto; }
   .hb-2 { left: 22px; right: 22px; top: 44%; bottom: auto; max-width: none; text-align: left; }
   .hb-3 { bottom: 13%; }

@@ -1,12 +1,15 @@
 /* ============================================================
    APEX AUTOMATIONS — Scroll-Scrubbed Eagle Flight
-   The hero is pinned while the user's scroll drives a 102-frame
-   eagle sequence on a canvas: a head-on eagle beating its wings
-   (one 34-frame wingbeat tiled three times, so the loop is
-   seamless and the scrub opens on the fully spread pose). Footage
-   is black-backed and screen-blended, so the eagle flies inside
-   the page. At the end of its run it rises and dissolves; the site
-   continues below.
+   The hero is pinned while the user's scroll drives a frame
+   sequence of a head-on eagle beating its wings on a canvas.
+   Desktop plays a 16:9 sequence (102 frames: one 34-frame wingbeat
+   tiled three times, opening on the fully spread pose). Phones held
+   upright get their own 9:19.5 portrait sequence (73 frames, one
+   continuous wingbeat played straight through) that fills the screen
+   and weighs well under half as much; rotating swaps sequences.
+   Footage is black-backed and
+   screen-blended, so the eagle flies inside the page. At the end of
+   its run it rises and dissolves; the site continues below.
 
    Perf: progress is derived from cached scroll metrics (no
    per-frame getBoundingClientRect reflow); draw() skips redundant
@@ -23,9 +26,26 @@
   var ctx = canvas.getContext('2d');
 
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var isMobile = window.matchMedia('(max-width: 768px)').matches;
+  var phoneMQ = window.matchMedia('(max-width: 768px)');
 
-  var FRAMES = 102;
+  // frames = files on disk; beats = how many times the scrub plays them
+  // (a value > 1 needs frames that loop seamlessly); eagleCy = the vertical
+  // centre of the eagle's motion inside the portrait frames (baked in when
+  // the frames were built)
+  var PORTRAIT = { dir: 'assets/eagle-mobile/', frames: 73, beats: 1, eagleCy: 0.27 };
+  var LANDSCAPE = { dir: 'assets/eagle-seq3/', frames: 102, beats: 1 };
+  var isMobile, SEQ, FRAMES;
+  // Phones held upright play the portrait footage; desktop, tablets and phones
+  // held sideways play the 16:9 footage. Re-checked on every resize, so
+  // rotating a phone swaps the sequence instead of stretching the wrong one.
+  function pickSeq() {
+    isMobile = phoneMQ.matches;
+    var w = canvas.clientWidth || window.innerWidth;
+    var h = canvas.clientHeight || window.innerHeight;
+    return isMobile && h > w ? PORTRAIT : LANDSCAPE;
+  }
+  SEQ = pickSeq();
+  FRAMES = SEQ.frames;
   var SCRUB_END = 0.74;   // share of the pin spent flying; the rest is the exit
 
   var display = 0, target = 0, dirty = true;
@@ -33,7 +53,7 @@
 
   /* ---------- frame loading ---------- */
   var imgs = new Array(FRAMES);
-  function src(i) { return 'assets/eagle-seq3/frame-' + ('00' + (i + 1)).slice(-3) + '.webp'; }
+  function src(i) { return SEQ.dir + 'frame-' + ('00' + (i + 1)).slice(-3) + '.webp'; }
   function load(i, cb) {
     if (imgs[i]) {
       if (cb && imgs[i].ready) cb();
@@ -48,6 +68,22 @@
     };
     im.src = src(i);
     imgs[i] = im;
+  }
+
+  function loadAll() {
+    load(0);
+    for (var i = 1; i <= 20 && i < FRAMES; i++) load(i);
+    setTimeout(function () { for (var j = 21; j < FRAMES; j++) load(j); }, 600);
+  }
+  // switch to the sequence that fits the canvas now; true if it changed
+  function syncSeq() {
+    var next = pickSeq();
+    if (next === SEQ) return false;
+    SEQ = next;
+    FRAMES = SEQ.frames;
+    imgs = new Array(FRAMES);
+    lastFi = -1; dirty = true;
+    return true;
   }
 
   function nearestReady(i) {
@@ -66,13 +102,22 @@
   }
 
   /* ---------- cached scroll metrics (measured on load/resize, never per frame) ---------- */
-  var stageTop = 0, stageRange = 1, vh = window.innerHeight;
+  var stageTop = 0, stageRange = 1, vh = window.innerHeight, eagleY = 0;
+  var hb1 = document.querySelector('.hb-1');
   function measure() {
     var top = 0, el = stage;
     while (el) { top += el.offsetTop; el = el.offsetParent; }
     stageTop = top;
     vh = window.innerHeight;
     stageRange = Math.max(1, stage.offsetHeight - vh);
+    // portrait footage: the eagle sits midway between the nav and the first
+    // title card (offsetTop ignores the card's scroll transform)
+    eagleY = 0;
+    if (SEQ === PORTRAIT) {
+      var navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 66;
+      var textTop = hb1 ? hb1.offsetTop : canvas.clientHeight * 0.44;
+      eagleY = (navH + textTop) / 2;
+    }
   }
   function progress() {
     var sy = window.pageYOffset || document.documentElement.scrollTop || 0;
@@ -86,7 +131,8 @@
     if (!cw || !ch) return;
 
     var scrub = p / SCRUB_END; if (scrub > 1) scrub = 1;
-    var fi = Math.min(FRAMES - 1, Math.round(scrub * (FRAMES - 1)));
+    var span = FRAMES * SEQ.beats;
+    var fi = Math.min(span - 1, Math.round(scrub * (span - 1))) % FRAMES;
     var exit = p <= SCRUB_END ? 0 : (p - SCRUB_END) / (1 - SCRUB_END);
     var ease = exit * exit * (3 - 2 * exit); // smoothstep
 
@@ -103,24 +149,37 @@
     var op = +(0.9 * (1 - ease)).toFixed(3);
     if (op !== lastOpacity) { canvas.style.opacity = op; lastOpacity = op; }
 
-    // Fit the 16:9 footage to the frame, then scale up + drift up on exit.
-    // Desktop = cover (fills the wide hero). Mobile (portrait) = contain, so
-    // the WHOLE eagle stays visible instead of cropping to the centre 26%.
+    // Fit the footage, then scale up + drift up on exit.
+    // - Portrait footage (upright phones): cover fills the screen with no
+    //   visible frame edge, then the frame shifts so the eagle lands at eagleY,
+    //   never so far that the canvas would show past the frame's top or bottom.
+    // - Phones held sideways: contain the 16:9 footage, anchored under the nav.
+    // - Desktop / tablets: cover, centred.
     var iw = im.naturalWidth, ih = im.naturalHeight;
-    var fit = isMobile ? Math.min(cw / iw, ch / ih) : Math.max(cw / iw, ch / ih);
+    var portrait = SEQ === PORTRAIT;
+    var fit = isMobile && !portrait ? Math.min(cw / iw, ch / ih) : Math.max(cw / iw, ch / ih);
     var scale = fit * (1 + ease * 0.22);
     var dw = iw * scale, dh = ih * scale;
     var dx = (cw - dw) / 2;
-    // Mobile: anchor the contained eagle in the upper third (just under the nav).
-    var baseDy = isMobile ? ch * 0.12 : (ch - dh) / 2;
+    var baseDy = (ch - dh) / 2;
+    if (portrait && eagleY) {
+      baseDy = eagleY * dpr - SEQ.eagleCy * dh;
+      baseDy = Math.min(0, Math.max(ch - dh, baseDy));
+    } else if (isMobile) {
+      baseDy = ch * 0.12;
+    }
     var dy = baseDy - ease * ch * 0.28;
     ctx.drawImage(im, dx, dy, dw, dh);
   }
 
   /* ---------- reduced motion: one static frame, no pin, one download ---------- */
   if (prefersReduced) {
-    var staticDraw = function () { resize(); dirty = true; draw(0); };
-    load(0, staticDraw);
+    var staticDraw = function () {
+      syncSeq(); resize(); measure(); dirty = true;
+      if (imgs[0] && imgs[0].ready) draw(0);
+      else load(0, staticDraw); // first frame of the current sequence, then redraw
+    };
+    staticDraw();
     window.addEventListener('resize', staticDraw);
     // the title-card beats never get scrubbed here — show them all, statically
     Array.prototype.forEach.call(document.querySelectorAll('.hero-beat'), function (el) {
@@ -131,9 +190,7 @@
   }
 
   /* normal path: eager-load the opening frames, then the rest */
-  load(0);
-  for (var i = 1; i <= 20; i++) load(i);
-  setTimeout(function () { for (var j = 21; j < FRAMES; j++) load(j); }, 600);
+  loadAll();
 
   resize();
   measure();
@@ -144,7 +201,10 @@
   var resizeTimer;
   function onResize() {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function () { resize(); measure(); dirty = true; }, 150);
+    resizeTimer = setTimeout(function () {
+      if (syncSeq()) loadAll(); // rotated / crossed the phone breakpoint
+      resize(); measure(); dirty = true;
+    }, 150);
   }
   window.addEventListener('resize', onResize, { passive: true });
   window.addEventListener('load', function () { measure(); dirty = true; });
